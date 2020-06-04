@@ -7,14 +7,14 @@
       "added": false,
       "ar": "models/Eleven_usdz.usdz",
       "envMapFolder": "equirectangular/",
-      "envMapFile": "bath1.hdr",
+      "envMapFile": "bath.hdr",
       "items": [
         {
           "id": 61,
           "type": "gltf",
           "title": "modello 3d",
           "gltfFolder": "sink/",
-          "gltfFile": "Eleven_glb.glb"
+          "gltfFile": "Eleven_gltf.gltf"
         },
         {
           "id": 62,
@@ -38,7 +38,7 @@
       "added": false,
       "ar": "models/FLY_2_usdz.usdz",
       "envMapFolder": "equirectangular/",
-      "envMapFile": "bath1.hdr",
+      "envMapFile": "bath.hdr",
       "items": [
         {
           "id": 31,
@@ -70,7 +70,7 @@
       "added": false,
       "ar": "models/K EVO_usdz.usdz",
       "envMapFolder": "equirectangular/",
-      "envMapFile": "bath1.hdr",
+      "envMapFile": "bath.hdr",
       "items": [
         {
           "id": 11,
@@ -101,7 +101,7 @@
       "added": false,
       "ar": "models/SOLIX_usdz.usdz",
       "envMapFolder": "equirectangular/",
-      "envMapFile": "bath1.hdr",
+      "envMapFile": "bath.hdr",
       "items": [
         {
           "id": 41,
@@ -132,7 +132,7 @@
       "added": false,
       "ar": "models/TEN_2_usdz.usdz",
       "envMapFolder": "equirectangular/",
-      "envMapFile": "bath1.hdr",
+      "envMapFile": "bath.hdr",
       "items": [
         {
           "id": 51,

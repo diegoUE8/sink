@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import AgoraService, { MessageType } from '../agora/agora.service';
 import { DEBUG } from '../const';
 import { DragDownEvent, DragMoveEvent, DragService, DragUpEvent } from '../drag/drag.service';
-//import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Rect } from '../rect/rect';
 import { Panorama } from './panorama';
 
@@ -86,13 +86,16 @@ export class ModelViewerComponent extends Component {
 		}
 
 		
-		/*const controls = this.controls = new OrbitControls(camera, renderer.domElement);
+		const controls = this.controls = new OrbitControls(camera, renderer.domElement);
 		controls.enablePan = false;
 		controls.enableKeys = false;
+		controls.autoRotate = false;
+		controls.enableZoom = true;
+		controls.enableRotate = false;
 		controls.minDistance = 1;
 		controls.maxDistance = 100;
 		controls.target.set(0, 0, 0);
-		controls.update();*/
+		controls.update();
 		
 
 		this.drag$().pipe(
@@ -228,7 +231,7 @@ export class ModelViewerComponent extends Component {
 	addListeners() {
 		this.resize = this.resize.bind(this);
 		this.render = this.render.bind(this);
-		//this.controls.addEventListener('change', this.render); // use if there is no animation loop
+		this.controls.addEventListener('change', this.render); // use if there is no animation loop
 		window.addEventListener('resize', this.resize, false);
 		if (!DEBUG) {
 			const agora = this.agora = AgoraService.getSingleton();
@@ -272,7 +275,7 @@ export class ModelViewerComponent extends Component {
 
 	removeListeners() {
 		window.removeEventListener('resize', this.resize, false);
-		//this.controls.removeEventListener('change', this.render);
+		this.controls.removeEventListener('change', this.render);
 	}
 
 	reposPlane(object, rect) {
