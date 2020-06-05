@@ -63,7 +63,7 @@ export class AppComponent extends Component {
 			};
 		}
 		this.loadData();
-		this.checkCamera();
+		//this.checkCamera();
 	}
 
 	checkCamera() {

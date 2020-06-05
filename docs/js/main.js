@@ -330,8 +330,7 @@
         };
       }
 
-      this.loadData();
-      //this.checkCamera();
+      this.loadData(); //this.checkCamera();
     };
 
     _proto.checkCamera = function checkCamera() {

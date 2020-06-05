@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 6,
+      "id": 1,
       "name": "sink1",
       "likes": 33,
       "added": false,
@@ -10,29 +10,16 @@
       "envMapFile": "bath.hdr",
       "items": [
         {
-          "id": 61,
+          "id": 11,
           "type": "gltf",
           "title": "modello 3d",
           "gltfFolder": "sink/",
           "gltfFile": "Eleven_gltf.gltf"
-        },
-        {
-          "id": 62,
-          "type": "picture",
-          "title": "modello 3d",
-          "image": ""
-        },
-        {
-          "id": 63,
-          "type": "text",
-          "title": " ",
-          "abstract": " ",
-          "description": " "
         }
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "Sink2",
       "likes": 82,
       "added": false,
@@ -41,30 +28,17 @@
       "envMapFile": "bath.hdr",
       "items": [
         {
-          "id": 31,
+          "id": 21,
           "type": "gltf",
           "title": "modello 3d",
           "gltfFolder": "sink/",
           "gltfFile": "FLY_2.gltf"
-        },
-        {
-          "id": 32,
-          "type": "picture",
-          "title": "modello 3d",
-          "image": ""
-        },
-        {
-          "id": 34,
-          "type": "text",
-          "title": " ",
-          "abstract": " ",
-          "description": " "
         }
       ]
     },
 
     {
-      "id": 1,
+      "id": 3,
       "name": "Sink3",
       "likes": 101,
       "added": false,
@@ -73,24 +47,11 @@
       "envMapFile": "bath.hdr",
       "items": [
         {
-          "id": 11,
+          "id": 31,
           "type": "gltf",
           "title": "modello 3d",
           "gltfFolder": "sink/",
           "gltfFile": "K EVO_gltf.gltf"
-        },
-        {
-          "id": 13,
-          "type": "picture",
-          "title": "modello 3d",
-          "image": " "
-        },
-        {
-          "id": 15,
-          "type": "text",
-          "title": " ",
-          "abstract": " ",
-          "description": " "
         }
       ]
     },
@@ -109,19 +70,6 @@
           "title": "modello 3d",
           "gltfFolder": "sink/",
           "gltfFile": "SOLIX_gltf.gltf"
-        },
-        {
-          "id": 42,
-          "type": "picture",
-          "title": "modello 3d",
-          "image": ""
-        },
-        {
-          "id": 43,
-          "type": "text",
-          "title": " ",
-          "abstract": " ",
-          "description": " "
         }
       ]
     },
@@ -140,19 +88,6 @@
           "title": "modello 3d",
           "gltfFolder": "sink/",
           "gltfFile": "Ten_2_gltf.gltf"
-        },
-        {
-          "id": 52,
-          "type": "picture",
-          "title": "modello 3d",
-          "image": ""
-        },
-        {
-          "id": 53,
-          "type": "text",
-          "title": " ",
-          "abstract": " ",
-          "description": " "
         }
       ]
     }
