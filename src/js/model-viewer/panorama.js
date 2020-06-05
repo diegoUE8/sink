@@ -7,6 +7,7 @@ void main() {
 	vUv = uv;
 	// gl_PointSize = 8.0;
 	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+	
 }
 `;
 
@@ -64,9 +65,9 @@ export class Panorama {
 	}
 
 	create() {
-		const geometry = new THREE.SphereBufferGeometry(500, 60, 40);
-		geometry.scale(-1, 1, 1);
-		// const material = new THREE.MeshBasicMaterial();
+		const geometry = new THREE.SphereBufferGeometry(500, 60, 40); 
+		geometry.scale(1, 1, -1);
+		//const material = new THREE.MeshBasicMaterial();
 		const material = new THREE.ShaderMaterial({
 			vertexShader: VERTEX_SHADER,
 			fragmentShader: FRAGMENT_SHADER,

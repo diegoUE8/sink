@@ -15,7 +15,7 @@ export class ModelViewerComponent extends Component {
 			this.item_ = item;
 			if (item && this.renderer) {
 				this.panorama.loadRgbe(item, this.renderer, (envMap) => {
-					//this.scene.background = envMap;
+					this.scene.background = envMap;
 					this.scene.environment = envMap;
 					this.render();
 				});
@@ -87,6 +87,7 @@ export class ModelViewerComponent extends Component {
 
 		
 		const controls = this.controls = new OrbitControls(camera, renderer.domElement);
+		controls.enabled = true;
 		controls.enablePan = false;
 		controls.enableKeys = false;
 		controls.autoRotate = false;
@@ -94,6 +95,8 @@ export class ModelViewerComponent extends Component {
 		controls.enableRotate = false;
 		controls.minDistance = 1;
 		controls.maxDistance = 100;
+		controls.minZoom = 0;
+		controls.maxZoom = Infinity;
 		controls.target.set(0, 0, 0);
 		controls.update();
 		
@@ -133,7 +136,7 @@ export class ModelViewerComponent extends Component {
 					group.rotation.set(rotation.x + event.distance.y * 0.01, rotation.y + event.distance.x * 0.01, 0);
 					this.panorama.mesh.rotation.set(rotation.x + event.distance.y * 0.01, rotation.y + event.distance.x * 0.01 + Math.PI, 0);
 					this.render();
-					// this.rotate.next([group.rotation.x, group.rotation.y, group.rotation.z]);
+					//this.rotate.next([group.rotation.x, group.rotation.y, group.rotation.z]);
 					if (this.agora && this.agora.state.control) {
 						this.agora.sendMessage({
 							type: MessageType.SlideRotate,

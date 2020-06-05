@@ -55485,7 +55485,7 @@ vec4 envMapTexelToLinear(vec4 color) {
     return RgbeLoader;
   }();
 
-  var VERTEX_SHADER = "\nvarying vec2 vUv;\nvoid main() {\n\tvUv = uv;\n\t// gl_PointSize = 8.0;\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}\n";
+  var VERTEX_SHADER = "\nvarying vec2 vUv;\nvoid main() {\n\tvUv = uv;\n\t// gl_PointSize = 8.0;\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\t\n}\n";
   var FRAGMENT_SHADER = "\nvarying vec2 vUv;\nuniform vec2 resolution;\nuniform sampler2D texture;\n\nvec3 ACESFilmicToneMapping_( vec3 color ) {\n\tcolor *= 1.8;\n\treturn saturate( ( color * ( 2.51 * color + 0.03 ) ) / ( color * ( 2.43 * color + 0.59 ) + 0.14 ) );\n}\n\nvec4 getColor(vec2 p) {\n\treturn texture2D(texture, p);\n}\n\nvec3 encodeColor(vec4 color) {\n\treturn ACESFilmicToneMapping_(RGBEToLinear(color).rgb);\n}\n\nfloat rand(vec2 co){\n    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);\n}\n\nvec4 Blur(vec2 st, vec4 color) {\n\tconst float directions = 16.0;\n\tconst float quality = 3.0;\n\tfloat size = 16.0;\n\tconst float PI2 = 6.28318530718;\n\tconst float qq = 1.0;\n\tconst float q = 1.0 / quality;\n\tvec2 radius = size / resolution.xy;\n\tfor (float d = 0.0; d < PI2; d += PI2 / directions) {\n\t\tfor (float i = q; i <= qq; i += q) {\n\t\t\tvec2 dUv = vec2(cos(d), sin(d)) * radius * i;\n\t\t\tcolor += getColor(st + dUv);\n        }\n\t}\n\treturn color /= quality * directions - 15.0 + rand(st) * 4.0;\n}\n\nvoid main() {\n\tvec4 color = getColor(vUv);\n\t// color = Blur(vUv, color);\n\tcolor = vec4(encodeColor(color) + rand(vUv) * 0.1, 1.0);\n\tgl_FragColor = color;\n}\n";
   var Panorama = /*#__PURE__*/function () {
     function Panorama() {
@@ -55496,7 +55496,7 @@ vec4 envMapTexelToLinear(vec4 color) {
 
     _proto.create = function create() {
       var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
-      geometry.scale(-1, 1, 1); // const material = new THREE.MeshBasicMaterial();
+      geometry.scale(1, 1, -1); //const material = new THREE.MeshBasicMaterial();
 
       var material = new THREE.ShaderMaterial({
         vertexShader: VERTEX_SHADER,
@@ -55609,6 +55609,7 @@ vec4 envMapTexelToLinear(vec4 color) {
       }
 
       var controls = this.controls = new OrbitControls(camera, renderer.domElement);
+      controls.enabled = true;
       controls.enablePan = false;
       controls.enableKeys = false;
       controls.autoRotate = false;
@@ -55616,6 +55617,8 @@ vec4 envMapTexelToLinear(vec4 color) {
       controls.enableRotate = false;
       controls.minDistance = 1;
       controls.maxDistance = 100;
+      controls.minZoom = 0;
+      controls.maxZoom = Infinity;
       controls.target.set(0, 0, 0);
       controls.update();
       this.drag$().pipe(operators.takeUntil(this.unsubscribe$)).subscribe(function (event) {// console.log('dragService', event);
@@ -55646,7 +55649,7 @@ vec4 envMapTexelToLinear(vec4 color) {
 
           _this2.panorama.mesh.rotation.set(rotation.x + event.distance.y * 0.01, rotation.y + event.distance.x * 0.01 + Math.PI, 0);
 
-          _this2.render(); // this.rotate.next([group.rotation.x, group.rotation.y, group.rotation.z]);
+          _this2.render(); //this.rotate.next([group.rotation.x, group.rotation.y, group.rotation.z]);
 
 
           if (_this2.agora && _this2.agora.state.control) {
@@ -55792,7 +55795,7 @@ vec4 envMapTexelToLinear(vec4 color) {
 
           if (item && this.renderer) {
             this.panorama.loadRgbe(item, this.renderer, function (envMap) {
-              //this.scene.background = envMap;
+              _this4.scene.background = envMap;
               _this4.scene.environment = envMap;
 
               _this4.render();

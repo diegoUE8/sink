@@ -7,7 +7,7 @@
       "added": false,
       "ar": "models/Eleven_usdz.usdz",
       "envMapFolder": "equirectangular/",
-      "envMapFile": "bath.hdr",
+      "envMapFile": "bath1.hdr",
       "items": [
         {
           "id": 11,
