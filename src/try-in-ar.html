@@ -1,20 +1,33 @@
-<div class="try-in-ar-modal" try-in-ar>
-	<div class="modal__header">
-		<button type="button" class="btn--close" (click)="close()">
-			<svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#close"></use></svg>
-		</button>
+<!-- @@master = ./templates/layout.html { "baseHref": "/sink/" } -->
+
+<!-- @@block = main-->
+
+<div class="try-in-ar" try-in-ar>
+	<div *if="devicePlatform == 'android'">
+		<script type="module" src="https://unpkg.com/@google/model-viewer@0.3.1/dist/model-viewer.js"></script>
+		<script nomodule src="https://unpkg.com/@google/model-viewer@0.3.1/dist/model-viewer-legacy.js"></script>
 	</div>
-	<div class="container">
-		<div class="form">
-			<div class="title">Inquadra il qrcode con il cellulare o il tablet per vedere il VR.</div>
-			<div class="picture">
-				<canvas class="qrcode"></canvas>
+	<div class="ui" *if="!viewId">
+		<div class="group--info">
+			<div class="group--info__content">
+				<div class="info">Unknown url.</div>
 			</div>
-			<div class="group--cta">
-				<button type="button" class="btn--accept" (click)="close()">
-					<span>Chiudi</span>
-				</button>
+		</div>
+	</div>
+	<div class="ui" *if="viewId && devicePlatform === 'windowsPhone'">
+		<div class="group--info">
+			<div class="group--info__content">
+				<div class="info">Windows Phone not supported.</div>
+			</div>
+		</div>
+	</div>
+	<div class="ui" *if="viewId && devicePlatform === 'unknown'">
+		<div class="group--info">
+			<div class="group--info__content">
+				<div class="info">Unsupported device.</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!-- @@close-->

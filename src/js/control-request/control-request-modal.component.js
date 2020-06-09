@@ -2,7 +2,7 @@ import { Component, getContext } from 'rxcomp';
 import ModalOutletComponent from '../modal/modal-outlet.component';
 import ModalService from '../modal/modal.service';
 
-export default class ControlRequestComponent extends Component {
+export default class ControlRequestModalComponent extends Component {
 
 	onInit() {
 		super.onInit();
@@ -22,7 +22,7 @@ export default class ControlRequestComponent extends Component {
 
 	/*
 	onDestroy() {
-		// console.log('ControlRequestComponent.onDestroy');
+		// console.log('ControlRequestModalComponent.onDestroy');
 	}
 	*/
 
@@ -32,6 +32,6 @@ export default class ControlRequestComponent extends Component {
 
 }
 
-ControlRequestComponent.meta = {
-	selector: '[control-request]'
+ControlRequestModalComponent.meta = {
+	selector: '[control-request-modal]'
 };

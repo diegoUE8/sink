@@ -1,7 +1,8 @@
 import { CoreModule, Module } from 'rxcomp';
 import { FormModule } from 'rxcomp-form';
-import { AppComponent } from './app.component';
-import ControlRequestComponent from './control-request/control-request.component';
+import { AgoraComponent } from './agora/agora.component';
+import AppComponent from './app.component';
+import ControlRequestModalComponent from './control-request/control-request-modal.component';
 import DropdownItemDirective from './dropdown/dropdown-item.directive';
 import DropdownDirective from './dropdown/dropdown.directive';
 import ControlCustomSelectComponent from './forms/control-custom-select.component';
@@ -13,7 +14,8 @@ import { ModelTextComponent } from './model-viewer/model-text.component';
 import { ModelViewerComponent } from './model-viewer/model-viewer.component';
 import { ModelComponent } from './model-viewer/model.component';
 import { SliderDirective } from './slider/slider.directive';
-import TryInARComponent from './try-in-ar/try-in-ar';
+import TryInARModalComponent from './try-in-ar/try-in-ar-modal.component';
+import TryInARComponent from './try-in-ar/try-in-ar.component';
 
 export class AppModule extends Module {}
 
@@ -23,8 +25,9 @@ AppModule.meta = {
 		FormModule,
 	],
 	declarations: [
+		AgoraComponent,
 		ControlCustomSelectComponent,
-		ControlRequestComponent,
+		ControlRequestModalComponent,
 		DropdownDirective,
 		DropdownItemDirective,
 		ModalComponent,
@@ -36,6 +39,7 @@ AppModule.meta = {
 		ModelViewerComponent,
 		SliderDirective,
 		TryInARComponent,
+		TryInARModalComponent,
 	],
 	bootstrap: AppComponent,
 };

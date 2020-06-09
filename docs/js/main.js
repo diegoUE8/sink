@@ -5,10 +5,10 @@
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('rxcomp'), require('rxcomp-form'), require('rxjs/operators'), require('agora-rtm-sdk'), require('rxjs'), require('three')) :
-  typeof define === 'function' && define.amd ? define(['rxcomp', 'rxcomp-form', 'rxjs/operators', 'agora-rtm-sdk', 'rxjs', 'three'], factory) :
-  (global = global || self, factory(global.rxcomp, global.rxcomp.form, global.rxjs.operators, global.AgoraRTM, global.rxjs, global.THREE));
-}(this, (function (rxcomp, rxcompForm, operators, AgoraRTM, rxjs, THREE) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('rxcomp'), require('rxcomp-form'), require('rxjs/operators'), require('rxjs'), require('agora-rtm-sdk'), require('three')) :
+  typeof define === 'function' && define.amd ? define(['rxcomp', 'rxcomp-form', 'rxjs/operators', 'rxjs', 'agora-rtm-sdk', 'three'], factory) :
+  (global = global || self, factory(global.rxcomp, global.rxcomp.form, global.rxjs.operators, global.rxjs, global.AgoraRTM, global.THREE));
+}(this, (function (rxcomp, rxcompForm, operators, rxjs, AgoraRTM, THREE) { 'use strict';
 
   AgoraRTM = AgoraRTM && Object.prototype.hasOwnProperty.call(AgoraRTM, 'default') ? AgoraRTM['default'] : AgoraRTM;
 
@@ -34,17 +34,7 @@
     subClass.__proto__ = superClass;
   }
 
-  var environment = {
-    appKey: 'ab4289a46cd34da6a61fd8d66774b65f',
-    appCertificate: '',
-    channelName: 'Channel',
-    port: 5000,
-    apiEnabled: false,
-    paths: {
-      models: 'models/',
-      textures: 'textures/'
-    }
-  };
+  var BASE_HREF = document.querySelector('base').getAttribute('href');
 
   var STATIC = window.location.port === '41999' || window.location.host === 'actarian.github.io';
   var DEVELOPMENT = ['localhost', '127.0.0.1', '0.0.0.0'].indexOf(window.location.host.split(':')[0]) !== -1;
@@ -208,24 +198,6 @@
     return LocationService;
   }();
 
-  var RoleType = {
-    Attendee: 'attendee',
-    Publisher: 'publisher'
-  };
-  var MessageType = {
-    Ping: 'ping',
-    RequestControl: 'requestControl',
-    RequestControlAccepted: 'requestControlAccepted',
-    RequestControlRejected: 'requestControlRejected',
-    RequestControlDismiss: 'requestControlDismiss',
-    RequestControlDismissed: 'requestControlDismissed',
-    SlideChange: 'slideChange',
-    SlideRotate: 'slideRotate',
-    MenuNavTo: 'menuNavTo'
-  };
-
-  var BASE_HREF = document.querySelector('base').getAttribute('href');
-
   var ModalEvent = function ModalEvent(data) {
     this.data = data;
   };
@@ -297,23 +269,47 @@
   ModalService.modal$ = new rxjs.Subject();
   ModalService.events$ = new rxjs.Subject();
 
-  var CONTROL_REQUEST = BASE_HREF + 'control-request.html';
-  var TRY_IN_AR = BASE_HREF + 'try-in-ar.html';
-  var AppComponent = /*#__PURE__*/function (_Component) {
-    _inheritsLoose(AppComponent, _Component);
+  var environment = {
+    appKey: 'ab4289a46cd34da6a61fd8d66774b65f',
+    appCertificate: '',
+    channelName: 'Channel',
+    port: 5000,
+    apiEnabled: false,
+    paths: {
+      models: 'models/',
+      textures: 'textures/'
+    }
+  };
 
-    function AppComponent() {
+  var RoleType = {
+    Attendee: 'attendee',
+    Publisher: 'publisher'
+  };
+  var MessageType = {
+    Ping: 'ping',
+    RequestControl: 'requestControl',
+    RequestControlAccepted: 'requestControlAccepted',
+    RequestControlRejected: 'requestControlRejected',
+    RequestControlDismiss: 'requestControlDismiss',
+    RequestControlDismissed: 'requestControlDismissed',
+    SlideChange: 'slideChange',
+    SlideRotate: 'slideRotate',
+    MenuNavTo: 'menuNavTo'
+  };
+
+  var CONTROL_REQUEST = BASE_HREF + 'control-request-modal.html';
+  var TRY_IN_AR = BASE_HREF + 'try-in-ar-modal.html';
+  var AgoraComponent = /*#__PURE__*/function (_Component) {
+    _inheritsLoose(AgoraComponent, _Component);
+
+    function AgoraComponent() {
       return _Component.apply(this, arguments) || this;
     }
 
-    var _proto = AppComponent.prototype;
+    var _proto = AgoraComponent.prototype;
 
     _proto.onInit = function onInit() {
 
-      var _getContext = rxcomp.getContext(this),
-          node = _getContext.node;
-
-      node.classList.remove('hidden');
       this.items = [];
       this.item = null;
       this.form = null;
@@ -441,7 +437,7 @@
     };
 
     _proto.onDropped = function onDropped(id) {
-      console.log('AppComponent.onDropped', id);
+      console.log('AgoraComponent.onDropped', id);
     };
 
     _proto.parseQueryString = function parseQueryString() {
@@ -488,6 +484,31 @@
       }).pipe(operators.takeUntil(this.unsubscribe$)).subscribe(function (event) {// this.pushChanges();
       });
     };
+
+    return AgoraComponent;
+  }(rxcomp.Component);
+  AgoraComponent.meta = {
+    selector: '[agora-component]'
+  };
+
+  var AppComponent = /*#__PURE__*/function (_Component) {
+    _inheritsLoose(AppComponent, _Component);
+
+    function AppComponent() {
+      return _Component.apply(this, arguments) || this;
+    }
+
+    var _proto = AppComponent.prototype;
+
+    _proto.onInit = function onInit() {
+      var _getContext = rxcomp.getContext(this),
+          node = _getContext.node;
+
+      node.classList.remove('hidden');
+    } // onView() { const context = getContext(this); }
+    // onChanges() {}
+    // onDestroy() {}
+    ;
 
     return AppComponent;
   }(rxcomp.Component);
@@ -565,14 +586,14 @@
     "\n\t<div class=\"modal-outlet__container\" [class]=\"{ active: modal }\">\n\t\t<div class=\"modal-outlet__background\" (click)=\"reject($event)\"></div>\n\t\t<div class=\"modal-outlet__modal\"></div>\n\t</div>\n\t"
   };
 
-  var ControlRequestComponent = /*#__PURE__*/function (_Component) {
-    _inheritsLoose(ControlRequestComponent, _Component);
+  var ControlRequestModalComponent = /*#__PURE__*/function (_Component) {
+    _inheritsLoose(ControlRequestModalComponent, _Component);
 
-    function ControlRequestComponent() {
+    function ControlRequestModalComponent() {
       return _Component.apply(this, arguments) || this;
     }
 
-    var _proto = ControlRequestComponent.prototype;
+    var _proto = ControlRequestModalComponent.prototype;
 
     _proto.onInit = function onInit() {
       _Component.prototype.onInit.call(this);
@@ -594,7 +615,7 @@
     }
     /*
     onDestroy() {
-    	// console.log('ControlRequestComponent.onDestroy');
+    	// console.log('ControlRequestModalComponent.onDestroy');
     }
     */
     ;
@@ -603,10 +624,10 @@
       ModalService.reject();
     };
 
-    return ControlRequestComponent;
+    return ControlRequestModalComponent;
   }(rxcomp.Component);
-  ControlRequestComponent.meta = {
-    selector: '[control-request]'
+  ControlRequestModalComponent.meta = {
+    selector: '[control-request-modal]'
   };
 
   var DROPDOWN_ID = 1000000;
@@ -56343,6 +56364,65 @@ vec4 envMapTexelToLinear(vec4 color) {
     outputs: ['change', 'tween']
   };
 
+  var TryInARModalComponent = /*#__PURE__*/function (_Component) {
+    _inheritsLoose(TryInARModalComponent, _Component);
+
+    function TryInARModalComponent() {
+      return _Component.apply(this, arguments) || this;
+    }
+
+    var _proto = TryInARModalComponent.prototype;
+
+    _proto.onInit = function onInit() {
+      _Component.prototype.onInit.call(this);
+
+      var _getContext = rxcomp.getContext(this),
+          parentInstance = _getContext.parentInstance,
+          node = _getContext.node;
+
+      if (parentInstance instanceof ModalOutletComponent) {
+        var data = this.data = parentInstance.modal.data; // console.log('data', data);
+
+        if (data && data.ar) {
+          // const url = `${window.location.protocol}//${this.getHost()}${BASE_HREF}${data.ar.usdz}`;
+          var url = window.location.protocol + "//" + this.getHost() + BASE_HREF + "try-in-ar.html?viewId=" + data.id;
+          console.log('TryInARModalComponent', url);
+          var qrcode = new QRious({
+            element: node.querySelector('.qrcode'),
+            value: url,
+            size: 256
+          });
+        }
+      }
+    };
+
+    _proto.getHost = function getHost() {
+      var host = window.location.host.replace('127.0.0.1', '192.168.1.2');
+
+      if (host.substr(host.length - 1, 1) === '/') {
+        host = host.substr(0, host.length - 1);
+      }
+
+      return host;
+    };
+
+    _proto.close = function close() {
+      ModalService.reject();
+    };
+
+    return TryInARModalComponent;
+  }(rxcomp.Component);
+  TryInARModalComponent.meta = {
+    selector: '[try-in-ar-modal]'
+  };
+
+  var DevicePlatform = {
+    Unknown: 'Unknown',
+    IOS: 'ios',
+    Android: 'android',
+    WindowsPhone: 'windowsPhone'
+  };
+
   var TryInARComponent = /*#__PURE__*/function (_Component) {
     _inheritsLoose(TryInARComponent, _Component);
 
@@ -56353,29 +56433,91 @@ vec4 envMapTexelToLinear(vec4 color) {
     var _proto = TryInARComponent.prototype;
 
     _proto.onInit = function onInit() {
-      _Component.prototype.onInit.call(this);
+      var _this = this;
 
-      var _getContext = rxcomp.getContext(this),
-          parentInstance = _getContext.parentInstance,
-          node = _getContext.node;
+      this.devicePlatform = this.getDevicePlatform();
+      this.view = null;
+      var viewId = this.viewId = this.getViewId(); // console.log('TryInARComponent.viewId', viewId);
 
-      if (parentInstance instanceof ModalOutletComponent) {
-        var data = this.data = parentInstance.modal.data;
+      if (viewId) {
+        this.load$().pipe(operators.first()).subscribe(function (data) {
+          var view = data.products.find(function (x) {
+            return x.id === viewId;
+          }); // console.log('TryInARComponent.view', view);
 
-        if (data && data.ar) {
-          var url = window.location.protocol + "//" + window.location.host.replace('127.0.0.1', '192.168.1.2') + "/" + BASE_HREF + data.ar;
-          console.log(url);
-          var qrcode = new QRious({
-            element: node.querySelector('.qrcode'),
-            value: url,
-            size: 256
-          });
-        }
+          if (_this.devicePlatform === DevicePlatform.Android) {
+            var modelViewerNode = _this.getModelViewerNode(view);
+
+            var _getContext = rxcomp.getContext(_this),
+                node = _getContext.node;
+
+            node.appendChild(modelViewerNode);
+          } else if (_this.devicePlatform === DevicePlatform.IOS) {
+            var usdzSrc = window.location.protocol + "//" + _this.getHost() + BASE_HREF + view.ar.usdz;
+            window.location.href = usdzSrc;
+          }
+        });
       }
     };
 
-    _proto.close = function close() {
-      ModalService.reject();
+    _proto.getDevicePlatform = function getDevicePlatform() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera; // Windows Phone must come first because its UA also contains "Android"
+
+      if (/windows phone/i.test(userAgent)) {
+        return DevicePlatform.WindowsPhone;
+      }
+
+      if (/android/i.test(userAgent)) {
+        return DevicePlatform.Android;
+      } // iOS detection from: http://stackoverflow.com/a/9039885/177710
+
+
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return DevicePlatform.IOS;
+      }
+
+      return DevicePlatform.Unknown;
+    };
+
+    _proto.getViewId = function getViewId() {
+      var viewId = LocationService.get('viewId') || null;
+
+      if (viewId) {
+        viewId = parseInt(viewId);
+      }
+
+      return viewId;
+    };
+
+    _proto.getModelViewerNode = function getModelViewerNode(view) {
+      var gltfSrc = window.location.protocol + "//" + this.getHost() + BASE_HREF + view.ar.gltf;
+      var usdzSrc = window.location.protocol + "//" + this.getHost() + BASE_HREF + view.ar.usdz;
+      var template = "<model-viewer alt=\"" + view.name + "\" src=\"" + gltfSrc + "\" ios-src=\"" + usdzSrc + "\" magic-leap ar ar_preferred></model-viewer>";
+      var div = document.createElement("div");
+      div.innerHTML = template;
+      var node = div.firstElementChild;
+      return node;
+    };
+
+    _proto.getHost = function getHost() {
+      var host = window.location.host.replace('127.0.0.1', '192.168.1.2');
+
+      if (host.substr(host.length - 1, 1) === '/') {
+        host = host.substr(0, host.length - 1);
+      }
+
+      return host;
+    };
+
+    _proto.load$ = function load$() {
+      return HttpService.get$('./api/data.json').pipe(operators.map(function (data) {
+        data.products.forEach(function (view) {
+          view.items.forEach(function (item, index) {
+            item.index = index;
+          });
+        });
+        return data;
+      }));
     };
 
     return TryInARComponent;
@@ -56395,7 +56537,7 @@ vec4 envMapTexelToLinear(vec4 color) {
   }(rxcomp.Module);
   AppModule.meta = {
     imports: [rxcomp.CoreModule, rxcompForm.FormModule],
-    declarations: [ControlCustomSelectComponent, ControlRequestComponent, DropdownDirective, DropdownItemDirective, ModalComponent, ModalOutletComponent, ModelComponent, ModelGltfComponent, ModelPictureComponent, ModelTextComponent, ModelViewerComponent, SliderDirective, TryInARComponent],
+    declarations: [AgoraComponent, ControlCustomSelectComponent, ControlRequestModalComponent, DropdownDirective, DropdownItemDirective, ModalComponent, ModalOutletComponent, ModelComponent, ModelGltfComponent, ModelPictureComponent, ModelTextComponent, ModelViewerComponent, SliderDirective, TryInARComponent, TryInARModalComponent],
     bootstrap: AppComponent
   };
 

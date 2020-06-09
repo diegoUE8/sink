@@ -5,7 +5,10 @@
       "name": "sink1",
       "likes": 33,
       "added": false,
-      "ar": "models/Eleven_usdz.usdz",
+      "ar": {
+        "gltf": "models/sink/Eleven_gltf.gltf",
+        "usdz": "models/Eleven_usdz.usdz"
+      },
       "envMapFolder": "equirectangular/",
       "envMapFile": "bath1.hdr",
       "items": [
@@ -23,7 +26,10 @@
       "name": "Sink2",
       "likes": 82,
       "added": false,
-      "ar": "models/FLY_2_usdz.usdz",
+      "ar": {
+        "gltf": "models/sink/FLY_2.gltf",
+        "usdz": "models/FLY_2_usdz.usdz"
+      },
       "envMapFolder": "equirectangular/",
       "envMapFile": "bath.hdr",
       "items": [
@@ -36,13 +42,15 @@
         }
       ]
     },
-
     {
       "id": 3,
       "name": "Sink3",
       "likes": 101,
       "added": false,
-      "ar": "models/K EVO_usdz.usdz",
+      "ar": {
+        "gltf": "models/sink/K EVO_gltf.gltf",
+        "usdz": "models/K EVO_usdz.usdz"
+      },
       "envMapFolder": "equirectangular/",
       "envMapFile": "bath.hdr",
       "items": [
@@ -60,7 +68,10 @@
       "name": "Sink4",
       "likes": 33,
       "added": false,
-      "ar": "models/SOLIX_usdz.usdz",
+      "ar": {
+        "gltf": "models/sink/SOLIX_gltf.gltf",
+        "usdz": "models/SOLIX_usdz.usdz"
+      },
       "envMapFolder": "equirectangular/",
       "envMapFile": "bath.hdr",
       "items": [
@@ -78,7 +89,10 @@
       "name": "Sink5",
       "likes": 33,
       "added": false,
-      "ar": "models/TEN_2_usdz.usdz",
+      "ar": {
+        "gltf": "models/sink/TEN_2_gltf.gltf",
+        "usdz": "models/TEN_2_usdz.usdz"
+      },
       "envMapFolder": "equirectangular/",
       "envMapFile": "bath.hdr",
       "items": [
@@ -91,6 +105,5 @@
         }
       ]
     }
-          
   ]
 }
